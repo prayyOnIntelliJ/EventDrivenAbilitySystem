@@ -11,25 +11,35 @@ class EVENTABILITYSYSTEM_API UAbilityBase : public UObject
 	GENERATED_BODY()
 	
 public:
-	virtual bool CanActivate() const;
 	void Activate();
+	void End();
+	void Cancel();
+	
 	FORCEINLINE bool IsActive() const { return bIsActive; }
-	bool IsOnCooldown() const;
-	virtual void End();
+	FORCEINLINE bool IsOnCooldown() const { return bIsOnCooldown; }
+	
+	virtual bool CanActivate() const;
+	
+	void Initialize(ACharacter* InOwner, class UAbilityComponent* InComponent);
+	
+protected:
+	virtual void OnActivate();
+	virtual void OnEnd();
+	
+	void StartCooldown(float Duration);
+	
+	ACharacter* GetOwnerCharacter() const;
 	
 private:
 	UPROPERTY()
-	ACharacter* Owner;
+	ACharacter* OwnerCharacter = nullptr;
 	
 	UPROPERTY()
-	bool bIsActive = false;
+	UAbilityComponent* AbilityComponent = nullptr;
 	
-	virtual void OnActivate();
+	bool bIsActive = false;
+	bool bIsOnCooldown = false;
 	
 	FTimerHandle ActivationTimerHandle;
-	
-	void StartCooldown();
-	void ResetCooldown();
-	FORCEINLINE ACharacter* GetOwnerCharacter() const { return Owner; }	
 };
 
