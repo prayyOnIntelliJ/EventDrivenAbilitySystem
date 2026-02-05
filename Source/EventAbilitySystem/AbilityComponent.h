@@ -20,15 +20,18 @@ public:
 	void TryActivateAbility(FName AbilityId);
 	void CanActivateAbility(FName AbilityId);
 	void GetAbility(FName AbilityId);
+	
+	
+	void NotifyAbilityActivated(UAbilityBase* Ability);
+	void NotifyAbilityEnded(UAbilityBase* Ability);
+	void NotifyAbilityCooldownStarted(UAbilityBase* Ability);
+	void NotifyAbilityCooldownEnded(UAbilityBase* Ability);
 
 protected:
 	virtual void BeginPlay() override;
 	
 private:
-	void OnAbilityActivated(UAbilityBase* Ability);
-	void OnAbilityEnded(UAbilityBase* Ability);
-	void OnAbilityCooldownStarted(UAbilityBase* Ability);
-	void OnAbilityCooldownEnded(UAbilityBase* Ability);
+	void HandleAbilityActivated(UAbilityBase* Ability);
 	
 	ACharacter* GetOwningCharacter() const;
 	

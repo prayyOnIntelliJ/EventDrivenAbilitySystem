@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "AbilityBase.generated.h"
 
-UCLASS()
+UCLASS(Abstract)
 class EVENTABILITYSYSTEM_API UAbilityBase : public UObject
 {
 	GENERATED_BODY()
@@ -27,6 +27,7 @@ protected:
 	virtual void OnEnd();
 	
 	void StartCooldown(float Duration);
+	void ResetCooldown();
 	
 	ACharacter* GetOwnerCharacter() const;
 	

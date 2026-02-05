@@ -4,6 +4,8 @@
 #include "AbilityComponent.h"
 
 #include "AbilityBase.h"
+#include "DashAbility.h"
+#include "GameFramework/Character.h"
 
 UAbilityComponent::UAbilityComponent()
 {
@@ -12,6 +14,15 @@ UAbilityComponent::UAbilityComponent()
 
 void UAbilityComponent::InitializeAbilities()
 {
+	ACharacter* Owner = GetOwningCharacter();
+	if (!Owner)
+	{
+		return;
+	}
+	
+	UAbilityBase* Dash = NewObject<UDashAbility>(this);
+	Dash->Initialize(Owner, this);
+	Abilities.Add("Dash", Dash);
 }
 
 void UAbilityComponent::TryActivateAbility(FName AbilityId)
@@ -28,7 +39,7 @@ void UAbilityComponent::TryActivateAbility(FName AbilityId)
 		return;
 	
 	Ability->Activate();
-	OnAbilityActivated(Ability);
+	NotifyAbilityActivated(Ability);
 }
 
 void UAbilityComponent::CanActivateAbility(FName AbilityId)
@@ -42,25 +53,31 @@ void UAbilityComponent::GetAbility(FName AbilityId)
 void UAbilityComponent::BeginPlay()
 {
 	Super::BeginPlay();
+	InitializeAbilities();
 }
 
-void UAbilityComponent::OnAbilityActivated(UAbilityBase* Ability)
+void UAbilityComponent::HandleAbilityActivated(UAbilityBase* Ability)
 {
 }
 
-void UAbilityComponent::OnAbilityEnded(UAbilityBase* Ability)
+void UAbilityComponent::NotifyAbilityActivated(UAbilityBase* Ability)
+{
+	HandleAbilityActivated(Ability);
+}
+
+void UAbilityComponent::NotifyAbilityEnded(UAbilityBase* Ability)
 {
 }
 
-void UAbilityComponent::OnAbilityCooldownStarted(UAbilityBase* Ability)
+void UAbilityComponent::NotifyAbilityCooldownStarted(UAbilityBase* Ability)
 {
 }
 
-void UAbilityComponent::OnAbilityCooldownEnded(UAbilityBase* Ability)
+void UAbilityComponent::NotifyAbilityCooldownEnded(UAbilityBase* Ability)
 {
 }
 
 ACharacter* UAbilityComponent::GetOwningCharacter() const
 {
-	return nullptr;
+	return Cast<ACharacter>(GetOwner());
 }
