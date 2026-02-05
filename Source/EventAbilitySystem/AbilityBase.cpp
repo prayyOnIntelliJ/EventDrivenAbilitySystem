@@ -21,11 +21,6 @@ void UAbilityBase::Activate()
 	}
 }
 
-bool UAbilityBase::IsOnCooldown() const
-{
-	return false;
-}
-
 void UAbilityBase::End()
 {
 }
@@ -46,10 +41,7 @@ void UAbilityBase::StartCooldown(float Duration)
 {
 }
 
-void UAbilityBase::StartCooldown()
+ACharacter* UAbilityBase::GetOwnerCharacter() const
 {
-}
-
-void UAbilityBase::ResetCooldown()
-{
+	return OwnerCharacter;
 }
