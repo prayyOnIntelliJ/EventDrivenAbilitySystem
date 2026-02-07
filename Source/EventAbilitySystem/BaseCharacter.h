@@ -20,7 +20,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	void PlayAbilityAnimation(UAbilityBase* Ability);
 	void ApplyMovementImpulse(FVector Direction, float Strength);
 	void ApplyDamage(float Amount);
