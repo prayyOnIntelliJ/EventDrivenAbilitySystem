@@ -18,7 +18,7 @@ protected:
 	
 private:
 	float DashStrength = 1200.f;
-	float DashDuration = 0.2f;
+	float DashDuration = 1.f;
 	float CooldownDuration = 1.5f;
 	
 	FTimerHandle DashEndTimerHandle;

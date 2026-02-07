@@ -4,6 +4,7 @@
 #include "AbilityPlayerController.h"
 
 #include "AbilityComponent.h"
+#include "BaseCharacter.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/Character.h"
@@ -31,12 +32,13 @@ void AAbilityPlayerController::SetupInputComponent()
 	
 	check(EnhancedInput);
 	
-	EnhancedInput->BindAction(
-		DashAction,
-		ETriggerEvent::Triggered,
-		this,
-		&AAbilityPlayerController::InputDash
-		);
+	EnhancedInput->BindAction(DashAction, ETriggerEvent::Triggered, this, &AAbilityPlayerController::InputDash);
+	
+	EnhancedInput->BindAction(JumpAction, ETriggerEvent::Started, this, &AAbilityPlayerController::InputJumpStart);
+	EnhancedInput->BindAction(JumpAction, ETriggerEvent::Completed, this, &AAbilityPlayerController::InputJumpEnd);
+	
+	EnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AAbilityPlayerController::InputMove);
+	EnhancedInput->BindAction(MouseLookAction, ETriggerEvent::Triggered, this, &AAbilityPlayerController::InputLook);
 }
 
 void AAbilityPlayerController::InputDash(const FInputActionValue& Value)
@@ -46,18 +48,60 @@ void AAbilityPlayerController::InputDash(const FInputActionValue& Value)
 		return;
 	}
 	
-	ACharacter* Char = GetCharacter();
-	if (!Char)
+	if (ABaseCharacter* Char = Cast<ABaseCharacter>(GetCharacter()))
+	{
+		Char->DoDash(Value);
+	}
+}
+
+void AAbilityPlayerController::InputJumpStart(const FInputActionValue& Value)
+{
+	if (!Value.Get<bool>())
 	{
 		return;
 	}
 	
-	UAbilityComponent* AbilityComp = Char->FindComponentByClass<UAbilityComponent>();
-	
-	if (!AbilityComp)
+	if (ABaseCharacter* Char = Cast<ABaseCharacter>(GetCharacter()))
+	{
+		Char->DoJumpStart();
+	}
+}
+
+void AAbilityPlayerController::InputJumpEnd(const FInputActionValue& Value)
+{
+	if (!Value.Get<bool>())
 	{
 		return;
 	}
 	
-	AbilityComp->TryActivateAbility("Dash");
+	if (ABaseCharacter* Char = Cast<ABaseCharacter>(GetCharacter()))
+	{
+		Char->DoJumpEnd();
+	}
+}
+
+void AAbilityPlayerController::InputMove(const FInputActionValue& Value)
+{
+	if (!Value.Get<bool>())
+	{
+		return;
+	}
+	
+	if (ABaseCharacter* Char = Cast<ABaseCharacter>(GetCharacter()))
+	{
+		Char->DoMove(Value);
+	}
+}
+
+void AAbilityPlayerController::InputLook(const FInputActionValue& Value)
+{
+	if (!Value.Get<bool>())
+	{
+		return;
+	}
+	
+	if (ABaseCharacter* Char = Cast<ABaseCharacter>(GetCharacter()))
+	{
+		Char->DoLook(Value);
+	}
 }

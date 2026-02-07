@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
 
+struct FInputActionValue;
 class UAbilityBase;
 
 UCLASS()
@@ -24,5 +25,12 @@ public:
 	void PlayAbilityAnimation(UAbilityBase* Ability);
 	void ApplyMovementImpulse(FVector Direction, float Strength);
 	void ApplyDamage(float Amount);
+
+public:
+	void DoDash(const FInputActionValue& Value);
+	void DoMove(const FInputActionValue& Value);
+	void DoLook(const FInputActionValue& Value);
+	void DoJumpStart();
+	void DoJumpEnd();
 
 };

@@ -9,7 +9,7 @@
 
 class UAbilityBase;
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class EVENTABILITYSYSTEM_API UAbilityComponent : public UActorComponent
 {
 	GENERATED_BODY()
