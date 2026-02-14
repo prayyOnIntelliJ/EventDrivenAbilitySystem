@@ -4,7 +4,7 @@ Status: Work in Progress
 
 This is an active portfolio project and still in development.
 
-## 🧭 Overview
+## Overview
 
 
 EventAbilitySystem is a small portfolio project that shows how an event-driven ability system can be structured in a clean and modular way.
@@ -14,7 +14,7 @@ The goal is not to create a full game, but to demonstrate good system design, cl
 
 ---
 
-## 🧩 Core Ideas
+## Core Ideas
 
 - Event-driven ability system
 
@@ -35,7 +35,7 @@ The goal is not to create a full game, but to demonstrate good system design, cl
 
 ---
 
-## 🚧 Current State
+## Current State
 
 - Core ability architecture implemented
 
@@ -59,7 +59,7 @@ Still in progress:
 
 ---
 
-## 📝 Notes
+## Notes
 
 - The project currently uses the Unreal Engine Third Person Template.
 
@@ -70,7 +70,7 @@ Still in progress:
 
 ---
 
-## 🎯 Purpose
+## Purpose
 
 
 This project is meant to show:
@@ -87,7 +87,7 @@ This project is meant to show:
 
 ---
 
-## 🛠 Tech
+## Tech
 
 - Unreal Engine 5
 
