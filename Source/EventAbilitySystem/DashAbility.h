@@ -6,7 +6,7 @@
 #include "AbilityBase.h"
 #include "DashAbility.generated.h"
 
-UCLASS()
+UCLASS(	Abstract)
 class EVENTABILITYSYSTEM_API UDashAbility : public UAbilityBase
 {
 	GENERATED_BODY()
@@ -17,7 +17,7 @@ protected:
 	virtual void OnEnd() override;
 	
 private:
-	float DashStrength = 1200.f;
+	float DashStrength = 3000.f;
 	float DashDuration = 1.f;
 	float CooldownDuration = 1.5f;
 	

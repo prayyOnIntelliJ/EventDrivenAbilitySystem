@@ -9,7 +9,7 @@
 
 bool UDashAbility::CanActivate() const
 {
-	ACharacter* Character = GetOwnerCharacter();
+	const ACharacter* Character = GetOwnerCharacter();
 	if (!Character)
 	{
 		return false;
