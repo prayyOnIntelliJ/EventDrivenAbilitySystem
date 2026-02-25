@@ -4,6 +4,7 @@
 #include "AbilityComponent.h"
 
 #include "AbilityBase.h"
+#include "AbilityIds.h"
 #include "DashAbility.h"
 #include "GameFramework/Character.h"
 
@@ -22,7 +23,7 @@ void UAbilityComponent::InitializeAbilities()
 	
 	UAbilityBase* Dash = NewObject<UDashAbility>(this);
 	Dash->Initialize(Owner, this);
-	Abilities.Add("Dash", Dash);
+	Abilities.Add(AbilityIds::Dash, Dash);
 }
 
 void UAbilityComponent::TryActivateAbility(FName AbilityId)
