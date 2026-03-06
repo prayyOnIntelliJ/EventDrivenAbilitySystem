@@ -1,11 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "AbilityComponent.h"
 
 #include "AbilityBase.h"
 #include "AbilityIds.h"
 #include "DashAbility.h"
+#include "DoubleJumpAbility.h"
 #include "GameFramework/Character.h"
 
 UAbilityComponent::UAbilityComponent()
@@ -22,8 +20,11 @@ void UAbilityComponent::InitializeAbilities()
 	}
 	
 	UAbilityBase* Dash = NewObject<UDashAbility>(this);
+	UAbilityBase* DoubleJump = NewObject<UDoubleJumpAbility>(this);
 	Dash->Initialize(Owner, this);
+	DoubleJump->Initialize(Owner, this);
 	Abilities.Add(AbilityIds::Dash, Dash);
+	Abilities.Add(AbilityIds::DoubleJump, DoubleJump);
 }
 
 void UAbilityComponent::TryActivateAbility(FName AbilityId)
@@ -47,8 +48,14 @@ void UAbilityComponent::CanActivateAbility(FName AbilityId)
 {
 }
 
-void UAbilityComponent::GetAbility(FName AbilityId)
+UAbilityBase** UAbilityComponent::GetAbility(FName AbilityId)
 {
+	if (!AbilityId.IsValid() || Abilities.IsEmpty())
+	{
+		return nullptr;
+	}
+	
+	return Abilities.Find(AbilityId);
 }
 
 void UAbilityComponent::BeginPlay()

@@ -19,7 +19,7 @@ public:
 	void InitializeAbilities();
 	void TryActivateAbility(FName AbilityId);
 	void CanActivateAbility(FName AbilityId);
-	void GetAbility(FName AbilityId);
+	UAbilityBase** GetAbility(FName AbilityId);
 	
 	
 	void NotifyAbilityActivated(UAbilityBase* Ability);
