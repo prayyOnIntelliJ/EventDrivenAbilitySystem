@@ -64,6 +64,7 @@ void AAbilityPlayerController::InputJumpStart(const FInputActionValue& Value)
 	if (ABaseCharacter* Char = Cast<ABaseCharacter>(GetCharacter()))
 	{
 		Char->DoJumpStart();
+		Char->DoDoubleJump(Value);
 	}
 }
 

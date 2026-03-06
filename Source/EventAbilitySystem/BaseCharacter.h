@@ -28,6 +28,7 @@ public:
 
 public:
 	void DoDash(const FInputActionValue& Value);
+	void DoDoubleJump(const FInputActionValue& Value);
 	void DoMove(const FInputActionValue& Value);
 	void DoLook(const FInputActionValue& Value);
 	void DoJumpStart();

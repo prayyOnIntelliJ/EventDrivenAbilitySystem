@@ -56,6 +56,23 @@ void ABaseCharacter::DoDash(const FInputActionValue& Value)
 	AbilityComp->TryActivateAbility(AbilityIds::Dash);
 }
 
+void ABaseCharacter::DoDoubleJump(const FInputActionValue& Value)
+{
+	if (!Value.Get<bool>())
+	{
+		return;
+	}
+	
+	UAbilityComponent* AbilityComp = FindComponentByClass<UAbilityComponent>();
+	
+	if (!AbilityComp)
+	{
+		return;
+	}
+	
+	AbilityComp->TryActivateAbility(AbilityIds::DoubleJump);
+}
+
 void ABaseCharacter::DoMove(const FInputActionValue& Value)
 {
 	if (GetController() != nullptr)
