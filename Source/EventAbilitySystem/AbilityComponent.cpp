@@ -66,12 +66,12 @@ void UAbilityComponent::BeginPlay()
 
 void UAbilityComponent::HandleAbilityActivated(EAbilityTypes AbilityType) 
 {
-	OnAbilityActivated.Broadcast(AbilityType);
+	OnAbilityStateChanged.Broadcast(AbilityType, true);
 }
 
 void UAbilityComponent::HandleAbilityEnded(EAbilityTypes AbilityType)
 {
-	OnAbilityEnded.Broadcast(AbilityType);
+	OnAbilityStateChanged.Broadcast(AbilityType, false);
 }
 
 void UAbilityComponent::NotifyAbilityActivated(EAbilityTypes AbilityType)

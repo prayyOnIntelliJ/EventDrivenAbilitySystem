@@ -14,8 +14,7 @@ void AAbilityPlayerController::OnPossess(APawn* InPawn)
 	{
 		if (UAbilityComponent* AbilityComp = Char->GetComponentByClass<UAbilityComponent>())
 		{
-			AbilityComp->OnAbilityActivated.AddUniqueDynamic(this, &AAbilityPlayerController::RespondToAbilityActivated);
-			AbilityComp->OnAbilityEnded.AddUniqueDynamic(this, &AAbilityPlayerController::RespondToAbilityEnded);
+			AbilityComp->OnAbilityStateChanged.AddUniqueDynamic(this, &AAbilityPlayerController::RespondToAbilityStateChanged);
 		}
 	}
 }
@@ -118,12 +117,7 @@ void AAbilityPlayerController::InputLook(const FInputActionValue& Value)
 	}
 }
 
-void AAbilityPlayerController::RespondToAbilityActivated(EAbilityTypes AbilityType)
+void AAbilityPlayerController::RespondToAbilityStateChanged(EAbilityTypes AbilityType, bool bHasBeenActivated)
 {
-	OnAbilityActivated.Broadcast(AbilityType);
-}
-
-void AAbilityPlayerController::RespondToAbilityEnded(EAbilityTypes AbilityType)
-{
-	OnAbilityEnded.Broadcast(AbilityType);
+	OnAbilityStateChanged.Broadcast(AbilityType, bHasBeenActivated);
 }

@@ -7,8 +7,7 @@
 class UAbilityBase;
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityActivatedSignature, EAbilityTypes, AbilityType);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityEndedSignature, EAbilityTypes, AbilityType);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAbilityStateChangedSignature, EAbilityTypes, AbilityType, bool, bHasBeenActivated);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class EVENTABILITYSYSTEM_API UAbilityComponent : public UActorComponent
@@ -29,9 +28,7 @@ public:
 	void NotifyAbilityCooldownEnded(EAbilityTypes AbilityType);
 	
 	UPROPERTY(BlueprintAssignable, Category = "Events")
-	FOnAbilityActivatedSignature OnAbilityActivated;
-	UPROPERTY(BlueprintAssignable, Category = "Events")
-	FOnAbilityEndedSignature OnAbilityEnded;
+	FOnAbilityStateChangedSignature OnAbilityStateChanged;
 
 protected:
 	virtual void BeginPlay() override;
