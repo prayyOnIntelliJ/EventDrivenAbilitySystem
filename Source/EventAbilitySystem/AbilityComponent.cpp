@@ -66,6 +66,12 @@ void UAbilityComponent::BeginPlay()
 
 void UAbilityComponent::HandleAbilityActivated(UAbilityBase* Ability)
 {
+	OnAbilityActivated.Broadcast(Ability);
+}
+
+void UAbilityComponent::HandleAbilityEnded(UAbilityBase* Ability)
+{
+	OnAbilityEnded.Broadcast(Ability);
 }
 
 void UAbilityComponent::NotifyAbilityActivated(UAbilityBase* Ability)
@@ -75,6 +81,7 @@ void UAbilityComponent::NotifyAbilityActivated(UAbilityBase* Ability)
 
 void UAbilityComponent::NotifyAbilityEnded(UAbilityBase* Ability)
 {
+	HandleAbilityEnded(Ability);
 }
 
 void UAbilityComponent::NotifyAbilityCooldownStarted(UAbilityBase* Ability)

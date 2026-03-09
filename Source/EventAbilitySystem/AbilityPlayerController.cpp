@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "AbilityPlayerController.h"
 
 #include "AbilityComponent.h"
@@ -8,6 +5,20 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/Character.h"
+
+void AAbilityPlayerController::OnPossess(APawn* InPawn)
+{
+	Super::OnPossess(InPawn);
+	
+	if (ABaseCharacter* Char = Cast<ABaseCharacter>(InPawn))
+	{
+		if (UAbilityComponent* AbilityComp = Char->GetComponentByClass<UAbilityComponent>())
+		{
+			AbilityComp->OnAbilityActivated.AddUniqueDynamic(this, &AAbilityPlayerController::RespondToAbilityActivated);
+			AbilityComp->OnAbilityEnded.AddUniqueDynamic(this, &AAbilityPlayerController::RespondToAbilityEnded);
+		}
+	}
+}
 
 void AAbilityPlayerController::BeginPlay()
 {
@@ -105,4 +116,14 @@ void AAbilityPlayerController::InputLook(const FInputActionValue& Value)
 	{
 		Char->DoLook(Value);
 	}
+}
+
+void AAbilityPlayerController::RespondToAbilityActivated(UAbilityBase* Ability)
+{
+	OnAbilityActivated.Broadcast(Ability);
+}
+
+void AAbilityPlayerController::RespondToAbilityEnded(UAbilityBase* Ability)
+{
+	OnAbilityEnded.Broadcast(Ability);
 }
