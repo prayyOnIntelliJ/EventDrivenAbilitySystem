@@ -31,12 +31,12 @@ void UDoubleJumpAbility::OnActivate()
 		return;
 	}
 	
-	const FVector JumpDirection = Character->GetActorUpVector();
-	
 	Character->PlayAbilityAnimation(this);
 	
+	FVector LaunchDir = Character->GetActorForwardVector() + Character->GetActorUpVector();
+	
 	Character->LaunchCharacter(
-		JumpDirection * DoubleJumpStrength,
+		LaunchDir * DoubleJumpStrength,
 		true,
 		true);
 	

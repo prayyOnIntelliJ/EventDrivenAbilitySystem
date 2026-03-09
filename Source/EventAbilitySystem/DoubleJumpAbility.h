@@ -16,7 +16,7 @@ protected:
 	virtual void OnEnd() override;
 	
 private:
-	float DoubleJumpStrength = 500.f;
+	float DoubleJumpStrength = 1000.f;
 	float DoubleJumpDuration = 1.f;
 	float DoubleJumpCooldown = 5.f;
 	
