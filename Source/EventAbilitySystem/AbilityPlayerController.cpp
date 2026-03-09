@@ -118,12 +118,12 @@ void AAbilityPlayerController::InputLook(const FInputActionValue& Value)
 	}
 }
 
-void AAbilityPlayerController::RespondToAbilityActivated(UAbilityBase* Ability)
+void AAbilityPlayerController::RespondToAbilityActivated(EAbilityTypes AbilityType)
 {
-	OnAbilityActivated.Broadcast(Ability);
+	OnAbilityActivated.Broadcast(AbilityType);
 }
 
-void AAbilityPlayerController::RespondToAbilityEnded(UAbilityBase* Ability)
+void AAbilityPlayerController::RespondToAbilityEnded(EAbilityTypes AbilityType)
 {
-	OnAbilityEnded.Broadcast(Ability);
+	OnAbilityEnded.Broadcast(AbilityType);
 }

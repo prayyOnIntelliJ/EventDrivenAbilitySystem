@@ -4,6 +4,13 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
+void UDoubleJumpAbility::Initialize(ACharacter* InOwner, class UAbilityComponent* InComponent)
+{
+	Super::Initialize(InOwner, InComponent);
+	
+	AbilityType = EAbilityTypes::DOUBLE_JUMP;
+}
+
 bool UDoubleJumpAbility::CanActivate() const
 {
 	const ACharacter* Character = GetOwnerCharacter();

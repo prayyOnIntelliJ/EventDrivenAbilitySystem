@@ -4,6 +4,13 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
+void UDashAbility::Initialize(ACharacter* InOwner, class UAbilityComponent* InComponent)
+{
+	Super::Initialize(InOwner, InComponent);
+	
+	AbilityType = EAbilityTypes::DASH;
+}
+
 bool UDashAbility::CanActivate() const
 {
 	const ACharacter* Character = GetOwnerCharacter();

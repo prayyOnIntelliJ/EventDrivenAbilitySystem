@@ -7,8 +7,8 @@
 class UAbilityBase;
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityActivatedSignature, UAbilityBase*, Ability);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityEndedSignature, UAbilityBase*, Ability);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityActivatedSignature, EAbilityTypes, AbilityType);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityEndedSignature, EAbilityTypes, AbilityType);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class EVENTABILITYSYSTEM_API UAbilityComponent : public UActorComponent
@@ -23,10 +23,10 @@ public:
 	UAbilityBase** GetAbility(FName AbilityId);
 	
 	
-	void NotifyAbilityActivated(UAbilityBase* Ability);
-	void NotifyAbilityEnded(UAbilityBase* Ability);
-	void NotifyAbilityCooldownStarted(UAbilityBase* Ability);
-	void NotifyAbilityCooldownEnded(UAbilityBase* Ability);
+	void NotifyAbilityActivated(EAbilityTypes AbilityType);
+	void NotifyAbilityEnded(EAbilityTypes AbilityType);
+	void NotifyAbilityCooldownStarted(EAbilityTypes AbilityType);
+	void NotifyAbilityCooldownEnded(EAbilityTypes AbilityType);
 	
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FOnAbilityActivatedSignature OnAbilityActivated;
@@ -37,8 +37,8 @@ protected:
 	virtual void BeginPlay() override;
 	
 private:
-	void HandleAbilityActivated(UAbilityBase* Ability);
-	void HandleAbilityEnded(UAbilityBase* Ability);
+	void HandleAbilityActivated(EAbilityTypes AbilityType);
+	void HandleAbilityEnded(EAbilityTypes AbilityType);
 	
 	ACharacter* GetOwningCharacter() const;
 	

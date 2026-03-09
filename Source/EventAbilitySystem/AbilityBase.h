@@ -3,6 +3,13 @@
 #include "CoreMinimal.h"
 #include "AbilityBase.generated.h"
 
+UENUM(BlueprintType)
+enum class EAbilityTypes : uint8
+{
+	DASH = 0 UMETA(DisplayName = "Dash"),
+	DOUBLE_JUMP = 1 UMETA(DisplayName = "DoubleJump")
+};
+
 UCLASS(Abstract)
 class EVENTABILITYSYSTEM_API UAbilityBase : public UObject
 {
@@ -18,7 +25,9 @@ public:
 	
 	virtual bool CanActivate() const;
 	
-	void Initialize(ACharacter* InOwner, class UAbilityComponent* InComponent);
+	virtual void Initialize(ACharacter* InOwner, class UAbilityComponent* InComponent);
+	
+	FORCEINLINE EAbilityTypes GetAbilityType() { return AbilityType; }
 	
 protected:
 	virtual void OnActivate();
@@ -28,6 +37,8 @@ protected:
 	void ResetCooldown();
 	
 	ACharacter* GetOwnerCharacter() const;
+	
+	EAbilityTypes AbilityType;
 	
 private:
 	UPROPERTY()

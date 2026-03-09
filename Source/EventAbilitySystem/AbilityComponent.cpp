@@ -41,7 +41,7 @@ void UAbilityComponent::TryActivateAbility(FName AbilityId)
 		return;
 	
 	Ability->Activate();
-	NotifyAbilityActivated(Ability);
+	NotifyAbilityActivated(Ability->GetAbilityType());
 }
 
 void UAbilityComponent::CanActivateAbility(FName AbilityId)
@@ -64,31 +64,31 @@ void UAbilityComponent::BeginPlay()
 	InitializeAbilities();
 }
 
-void UAbilityComponent::HandleAbilityActivated(UAbilityBase* Ability)
+void UAbilityComponent::HandleAbilityActivated(EAbilityTypes AbilityType) 
 {
-	OnAbilityActivated.Broadcast(Ability);
+	OnAbilityActivated.Broadcast(AbilityType);
 }
 
-void UAbilityComponent::HandleAbilityEnded(UAbilityBase* Ability)
+void UAbilityComponent::HandleAbilityEnded(EAbilityTypes AbilityType)
 {
-	OnAbilityEnded.Broadcast(Ability);
+	OnAbilityEnded.Broadcast(AbilityType);
 }
 
-void UAbilityComponent::NotifyAbilityActivated(UAbilityBase* Ability)
+void UAbilityComponent::NotifyAbilityActivated(EAbilityTypes AbilityType)
 {
-	HandleAbilityActivated(Ability);
+	HandleAbilityActivated(AbilityType);
 }
 
-void UAbilityComponent::NotifyAbilityEnded(UAbilityBase* Ability)
+void UAbilityComponent::NotifyAbilityEnded(EAbilityTypes AbilityType)
 {
-	HandleAbilityEnded(Ability);
+	HandleAbilityEnded(AbilityType);
 }
 
-void UAbilityComponent::NotifyAbilityCooldownStarted(UAbilityBase* Ability)
+void UAbilityComponent::NotifyAbilityCooldownStarted(EAbilityTypes AbilityType)
 {
 }
 
-void UAbilityComponent::NotifyAbilityCooldownEnded(UAbilityBase* Ability)
+void UAbilityComponent::NotifyAbilityCooldownEnded(EAbilityTypes AbilityType)
 {
 }
 

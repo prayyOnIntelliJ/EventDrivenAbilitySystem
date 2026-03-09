@@ -35,7 +35,7 @@ void UAbilityBase::End()
 	
 	if (AbilityComponent)
 	{
-		AbilityComponent->NotifyAbilityEnded(this);
+		AbilityComponent->NotifyAbilityEnded(GetAbilityType());
 	}
 }
 
@@ -50,7 +50,7 @@ void UAbilityBase::Cancel()
 	
 	if (AbilityComponent)
 	{
-		AbilityComponent->NotifyAbilityEnded(this);
+		AbilityComponent->NotifyAbilityEnded(GetAbilityType());
 	}
 }
 
@@ -73,7 +73,7 @@ void UAbilityBase::StartCooldown(float Duration)
 	
 	if (AbilityComponent)
 	{
-		AbilityComponent->NotifyAbilityCooldownStarted(this);
+		AbilityComponent->NotifyAbilityCooldownStarted(GetAbilityType());
 	}
 	
 	OwnerCharacter->GetWorldTimerManager().SetTimer(
@@ -96,7 +96,7 @@ void UAbilityBase::ResetCooldown()
 	
 	if (AbilityComponent)
 	{
-		AbilityComponent->NotifyAbilityCooldownEnded(this);
+		AbilityComponent->NotifyAbilityCooldownEnded(GetAbilityType());
 	}
 }
 

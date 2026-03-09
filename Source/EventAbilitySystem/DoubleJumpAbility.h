@@ -10,6 +10,7 @@ class EVENTABILITYSYSTEM_API UDoubleJumpAbility : public UAbilityBase
 	GENERATED_BODY()
 	
 protected:
+	virtual void Initialize(ACharacter* InOwner, class UAbilityComponent* InComponent) override;
 	virtual bool CanActivate() const override;
 	virtual void OnActivate() override;
 	virtual void OnEnd() override;

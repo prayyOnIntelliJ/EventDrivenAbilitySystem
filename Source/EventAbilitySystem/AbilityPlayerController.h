@@ -5,12 +5,13 @@
 #include "GameFramework/PlayerController.h"
 #include "AbilityPlayerController.generated.h"
 
+enum class EAbilityTypes : uint8;
 class UAbilityBase;
 class UInputAction;
 class UInputMappingContext;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityActivatedDelegate, UAbilityBase*, Ability);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityEndedDelegate, UAbilityBase*, Ability);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityActivatedDelegate, EAbilityTypes, AbilityType);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAbilityEndedDelegate, EAbilityTypes, AbilityType);
 
 UCLASS()
 class EVENTABILITYSYSTEM_API AAbilityPlayerController : public APlayerController
@@ -52,8 +53,8 @@ private:
 	void InputLook(const FInputActionValue& Value);
 	
 	UFUNCTION()
-	void RespondToAbilityActivated(UAbilityBase* Ability);
+	void RespondToAbilityActivated(EAbilityTypes AbilityType);
 	UFUNCTION()
-	void RespondToAbilityEnded(UAbilityBase* Ability);
+	void RespondToAbilityEnded(EAbilityTypes AbilityType);
 	
 };
