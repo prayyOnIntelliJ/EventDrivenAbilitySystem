@@ -11,6 +11,7 @@ class UInputAction;
 class UInputMappingContext;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAbilityActivatedDelegate, EAbilityTypes, AbilityType, bool, bHasBeenActivated);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAbilityCooldownChangedDelegate, EAbilityTypes, AbilityType, bool, bOnCooldown);
 
 UCLASS()
 class EVENTABILITYSYSTEM_API AAbilityPlayerController : public APlayerController
@@ -20,6 +21,8 @@ class EVENTABILITYSYSTEM_API AAbilityPlayerController : public APlayerController
 public:
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FOnAbilityActivatedDelegate OnAbilityStateChanged;
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+	FOnAbilityCooldownChangedDelegate OnAbilityCooldownChanged;
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Abilities | Input | Mapping")
@@ -51,5 +54,7 @@ private:
 	
 	UFUNCTION()
 	void RespondToAbilityStateChanged(EAbilityTypes AbilityType, bool bHasBeenActivated);
+	UFUNCTION()
+	void RespondToAbilityCooldownChanged(EAbilityTypes AbilityType, bool bOnCooldown);
 	
 };

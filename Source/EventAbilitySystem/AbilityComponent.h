@@ -8,6 +8,7 @@ class UAbilityBase;
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAbilityStateChangedSignature, EAbilityTypes, AbilityType, bool, bHasBeenActivated);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAbilityCooldownChangedSignature, EAbilityTypes, AbilityType, bool, bOnCooldown);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class EVENTABILITYSYSTEM_API UAbilityComponent : public UActorComponent
@@ -29,6 +30,8 @@ public:
 	
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FOnAbilityStateChangedSignature OnAbilityStateChanged;
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+	FOnAbilityCooldownChangedSignature OnAbilityCooldownChanged;
 
 protected:
 	virtual void BeginPlay() override;
@@ -36,6 +39,8 @@ protected:
 private:
 	void HandleAbilityActivated(EAbilityTypes AbilityType);
 	void HandleAbilityEnded(EAbilityTypes AbilityType);
+	void HandleAbilityCooldownStarted(EAbilityTypes AbilityType);
+	void HandleAbilityCooldownEnded(EAbilityTypes AbilityType);
 	
 	ACharacter* GetOwningCharacter() const;
 	

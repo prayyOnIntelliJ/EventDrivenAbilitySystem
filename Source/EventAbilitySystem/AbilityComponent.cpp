@@ -74,6 +74,16 @@ void UAbilityComponent::HandleAbilityEnded(EAbilityTypes AbilityType)
 	OnAbilityStateChanged.Broadcast(AbilityType, false);
 }
 
+void UAbilityComponent::HandleAbilityCooldownStarted(EAbilityTypes AbilityType)
+{
+	OnAbilityCooldownChanged.Broadcast(AbilityType, true);
+}
+
+void UAbilityComponent::HandleAbilityCooldownEnded(EAbilityTypes AbilityType)
+{
+	OnAbilityCooldownChanged.Broadcast(AbilityType, false);
+}
+
 void UAbilityComponent::NotifyAbilityActivated(EAbilityTypes AbilityType)
 {
 	HandleAbilityActivated(AbilityType);
@@ -86,10 +96,12 @@ void UAbilityComponent::NotifyAbilityEnded(EAbilityTypes AbilityType)
 
 void UAbilityComponent::NotifyAbilityCooldownStarted(EAbilityTypes AbilityType)
 {
+	HandleAbilityCooldownStarted(AbilityType);
 }
 
 void UAbilityComponent::NotifyAbilityCooldownEnded(EAbilityTypes AbilityType)
 {
+	HandleAbilityCooldownEnded(AbilityType);
 }
 
 ACharacter* UAbilityComponent::GetOwningCharacter() const
